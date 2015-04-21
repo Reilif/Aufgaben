@@ -1,0 +1,31 @@
+<template>
+
+    // TODO: Textfeld, daneben Button
+    <style></style>
+
+</template>
+
+<script>
+
+    var thatDoc = document;
+    var thisDoc = (thatDoc._currentScript || thatDoc.currentScript).ownerDocument;
+
+    var ChatFieldProto = Object.create(HTMLElement.prototype);
+
+    ChatFieldProto.createdCallback = function () {
+        // Erzeugt die ShadowRoot
+        var shadowRoot = this.createShadowRoot();
+        // Erzeugt einen Clone vom Template und hängt diesen an die ShadowRoot
+        var template = thisDoc.querySelector('template').content;
+        var clone = thatDoc.importNode(template, true);
+        shadowRoot.appendChild(clone);
+
+        //TODO: Listener auf BT zum Senden Optional:Enter-Druck im Textfeld
+    };
+
+
+    // TODO: Methode zum auslesen vom Textfeld, dieses soll in einem alert() ausgegeben werden.
+
+
+    var ChatField = thisDoc.registerElement('chat-field', {prototype: ChatFieldProto});
+</script>
